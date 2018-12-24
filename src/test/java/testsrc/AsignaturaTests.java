@@ -33,9 +33,14 @@ public class AsignaturaTests {
 	
 	@Test 
 	public void testCreacionPruebaEnActividad() {
-		asignaturaSetUp.añadePrueba(pruebaAux);
+		asignaturaSetUp.añadePrueba(pruebaAux, 0.1);
 		asignaturaSetUp.getPruebas().contains(pruebaAux);
 	}
-
+	
+	@Test 
+	public void testCreacionPruebaEnActividadPorValores() {
+		asignaturaSetUp.añadePrueba(LocalDate.now().plusDays(2), "Examen 2", "Prueba referente a los temas 3 y 4", 10.0, 0.1);
+		asignaturaSetUp.getPruebas().contains(pruebaAux);
+	}
 
 }
