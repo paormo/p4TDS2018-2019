@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 
+import es.uva.inf.tds.entornoeducativo.Asignatura;
+
 public class AsignaturaTests {
 	
 	@Test 
