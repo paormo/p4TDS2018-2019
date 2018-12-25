@@ -42,5 +42,15 @@ public class AsignaturaTests {
 		asignaturaSetUp.añadePrueba(LocalDate.now().plusDays(2), "Examen 2", "Prueba referente a los temas 3 y 4", 10.0, 0.1);
 		asignaturaSetUp.getPruebas().contains(pruebaAux);
 	}
+	
+	@Test
+	public void testObtenerCalificacionesFinalesDeLaAsignatura() {
+		assertNotNull(asignaturaSetUp.calificacionesFinales());
+	}
+	
+	@Test 
+	public void testObtenerCalificacionesParcialesDeLaAsignatura() {
+		assertNotNull(asignaturaSetUp.calificacionesParciales());
+	}
 
 }
