@@ -26,7 +26,7 @@ public class Asignatura {
 	 * @param prueba Prueba a añadir a la asignatura
 	 * @param pesoEnLaAsignatura Porcentaje que cuenta esa prueba en la asignatura
 	 * @throws IllegalArgumentException Si la prueba es null
-	 * @throws IllegalArgumentException Si el peso en la asignatura es null, menor a 1 o mayor a 1
+	 * @throws IllegalArgumentException Si el peso en la asignatura es null, menor a 0 o mayor a 1
 	 * @throws IllegalStateException Si al añadir esta prueba a la asignatura el peso total pasa de 1
 	 */
 	public void añadePrueba(Prueba prueba, double pesoEnLaAsignatura) {
