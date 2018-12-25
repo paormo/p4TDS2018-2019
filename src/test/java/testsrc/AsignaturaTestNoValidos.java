@@ -95,5 +95,30 @@ public class AsignaturaTestNoValidos {
 		asignaturaSetUp.añadePrueba(prueba1, 0.9);
 		asignaturaSetUp.añadePrueba(prueba2, 0.2);
 	}
-
+	@Test(expected=IllegalStateException.class)
+	public void testGetPruebasPeroNoHayNingunaPruebaActualmenteEnLaAsignatura() {
+		Asignatura aux = new Asignatura(nombre1, descripcion1, 10, fecha1, fecha4);
+		aux.getPruebas();
+	}
+	@Test (expected=IllegalStateException.class)
+	public void testObtenerCalificacionesFinalesPeroLaSumaDeLosPesosNoEs1(){
+		prueba2.marcarCalificada(LocalDate.now());
+		asignaturaSetUp.añadePrueba(prueba2, 0.2);
+		asignaturaSetUp.calificacionesFinales();
+	}
+	
+	@Test (expected=IllegalStateException.class)
+	public void testObtenerCalificacionesFinalesPeroAlgunaPruebaNoEstáCompletamenteCalificada(){
+		prueba2.marcarCalificada(LocalDate.now());
+		asignaturaSetUp.añadePrueba(prueba2, 0.2);
+		asignaturaSetUp.añadePrueba(prueba1, 0.8);
+		asignaturaSetUp.calificacionesFinales();
+	}
+	
+	@Test(expected=IllegalStateException.class)
+	public void testObtenerCalificacionesParcialesPeroNoHayNingunaPrueba() {
+		Asignatura aux = new Asignatura(nombre1, descripcion1, 10, fecha1, fecha4);
+		aux.calificacionesParciales();
+	}
+	
 }
