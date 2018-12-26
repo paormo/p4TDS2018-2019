@@ -6,10 +6,11 @@ import java.time.LocalDate;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import es.uva.inf.tds.entornoeducativo.Asignatura;
 import es.uva.inf.tds.entornoeducativo.Prueba;
-
+@Category({TDD.class,Unit.class})
 public class AsignaturaTestsTDD {
 	private Asignatura asignaturaSetUp;
 	LocalDate dia;

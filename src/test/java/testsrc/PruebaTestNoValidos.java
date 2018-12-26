@@ -5,10 +5,11 @@ import java.util.Hashtable;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import es.uva.inf.tds.entornoeducativo.Prueba;
 
-
+@Category({Unit.class,BlackBoxTestFirst.class})
 public class PruebaTestNoValidos {
 
 	private LocalDate fecha1;
