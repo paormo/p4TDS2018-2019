@@ -22,6 +22,7 @@ public class AsignaturaTestsTDD {
 		LocalDate aux2= LocalDate.now().plusDays(50);
 		Asignatura asignatura = new Asignatura("Mates", "Calculo y Algebra", 10.0,aux,aux2);
 		assertNotNull(asignatura);
+		fail();
 	}
 
 	@Before
@@ -35,6 +36,7 @@ public class AsignaturaTestsTDD {
 	@Test 
 	public void testAñadirPruebaEnAsignatura() {
 		asignaturaSetUp.añadePrueba(dia2,"Nombre Prueba","Prueba de Prueba",10.0);
+		fail();
 		
 	}
 	
