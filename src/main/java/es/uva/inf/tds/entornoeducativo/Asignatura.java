@@ -18,18 +18,25 @@ public class Asignatura {
 	 * @param diaInicio Fecha en la que comenzó el periodo lectivo de la asignatura
 	 * @param diaFin Fecha en la que acaba el perido lectivo de una asignatura
 	 */
-	public Asignatura (String nombre, String descripcion, int calificacionMaxima, LocalDate diaInicio, LocalDate diaFin) {
+	public Asignatura (String nombre, String descripcion, double calificacionMaxima, LocalDate diaInicio, LocalDate diaFin) {
 		// TODO 
 	}
 	/**
 	 * Permite añadir una prueba a una asignatura
-	 * @param prueba Prueba a añadir a la asignatura
+	 * @param fechaPrueba Fecha en la que se va a realizar la prueba
+	 * @param nombre Nombre de la Prueba a añadir a la asignatura
+	 * @param descripcion Descripcion de la Prueba a añadir a la asignatura
 	 * @param pesoEnLaAsignatura Porcentaje que cuenta esa prueba en la asignatura
-	 * @throws IllegalArgumentException Si la prueba es null
+	 * @throws IllegalArgumentException Si la fechaPrueba es null
+	 * @throws IllegalArgumentException Si la fechaprueba es anterior a la fecha de inicio de la asignatura
+	 * @throws IllegalArgumentException Si la fecha de la prueba es posterior a la finalizacion de la asignatura
+	 * @throws IllegalArgumentException Si el nombre es null
+	 * @throws IllegalArgumentException Si existe una prueba en la asignatura con ese nombre
+	 * @throws IllegalArgumentException Si la descripcion es null
 	 * @throws IllegalArgumentException Si el peso en la asignatura es null, menor a 0 o mayor a 1
 	 * @throws IllegalStateException Si al añadir esta prueba a la asignatura el peso total pasa de 1
 	 */
-	public void añadePrueba(Prueba prueba, double pesoEnLaAsignatura) {
+	public void añadePrueba(LocalDate fechaPrueba,String nombre, String descripcion,  double pesoEnLaAsignatura) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -40,11 +47,12 @@ public class Asignatura {
 	 */
 	public ArrayList<Prueba> getPruebas() {
 		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<Prueba>();
 	}
 	/**
 	 * Permite obtener los pares <idAlumno,notaFinal> de la asignatura.
 	 * @throws IllegalStateException Si la suma total de pesos de las pruebas no es 1
+	 * @throws IllegalStateException Si alguna prueba no está completamente calificada
 	 * @return Tabla conteniendo a los alumnos y sus calificaciones finales
 	 */
 	public Hashtable<String, Integer> calificacionesFinales() {
@@ -53,9 +61,8 @@ public class Asignatura {
 	}
 	/**
 	 * Permite obtener los pares <idAlumno,notaParcial> de la asignatura.
-	 * @throws IllegalStateException Si no hay pruebas en la asignatura
-	 * @throws IllegalStateException 
-	 * @return
+	 * @throws IllegalStateException Si no hay pruebas en la asignatura 
+	 * @return Tabla conteniendo los pares alumno-nota parcial de la asignatura 
 	 */
 	public Hashtable<String, Integer> calificacionesParciales() {
 		// TODO Auto-generated method stub

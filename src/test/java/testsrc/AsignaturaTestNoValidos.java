@@ -15,7 +15,7 @@ import es.uva.inf.tds.entornoeducativo.Prueba;
 @Category({Unit.class,BlackBoxTestFirst.class})
 public class AsignaturaTestNoValidos {
 	private Asignatura asignaturaSetUp;
-	private LocalDate fecha1;
+	private LocalDate dia1;
 	private LocalDate fecha2;
 	private LocalDate fecha3;
 	private LocalDate fecha4;
@@ -67,57 +67,91 @@ public class AsignaturaTestNoValidos {
 		nombre2="Lengua Castellana";
 		descripcion1="Cálculo y algebra";
 		descripcion2="Literatura y análisis sintáctico";
-		fecha1=LocalDate.now();
+		dia1=LocalDate.now();
 		fecha2=LocalDate.now().plusDays(10);
 		fecha3=LocalDate.now().plusDays(20);
 		fecha4=LocalDate.now().plusDays(30);
 		prueba1=new Prueba(fecha2,"Examen1", "Tipo Test", 10.0);
 		prueba2=new Prueba(fecha3,"Examen2", "Tipo Desarrollar", 5.0);
-		asignaturaSetUp=new Asignatura(nombre1, descripcion1, 10, fecha1, fecha4);
-	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testAñadirUnaPruebaPruebaEsNull() {
-		asignaturaSetUp.añadePrueba(null, 0.2);
+		asignaturaSetUp=new Asignatura(nombre1, descripcion1, 10, dia1, fecha4);
 	}
 	
 	@Test (expected=IllegalArgumentException.class)
 	public void testAñadirUnaPruebaPeroElPesoEnLaNotaEsMenorA0(){
-		asignaturaSetUp.añadePrueba(prueba1, -1);
+		asignaturaSetUp.añadePrueba(fecha2,nombre1,descripcion1,-1);;
 	}
 	
 	@Test (expected=IllegalArgumentException.class)
 	public void testAñadirUnaPruebaPeroElPesoEnLaNotaEsMayora1(){
-		asignaturaSetUp.añadePrueba(prueba1, 1.1);
+		asignaturaSetUp.añadePrueba(fecha2,nombre1,descripcion1,10.0);
 	}
 	@Test (expected=IllegalStateException.class)
 	public void testAñadirUnaPruebaPeroElPesoEnLaNotaTotalDeLaAsignaturaPasaDe1(){
-		asignaturaSetUp.añadePrueba(prueba1, 0.9);
-		asignaturaSetUp.añadePrueba(prueba2, 0.2);
+		asignaturaSetUp.añadePrueba(fecha2,nombre1,descripcion1,0.9);
+		asignaturaSetUp.añadePrueba(fecha2,nombre1,descripcion1,0.2);
 	}
+	
+	@Test (expected=IllegalStateException.class)
+	public void testAñadirUnaPruebaPeroLaFechaEsNull(){
+		LocalDate aux=null;
+		asignaturaSetUp.añadePrueba(aux,nombre1,descripcion1,0.9);
+	}
+	@Test (expected=IllegalStateException.class)
+	public void testAñadirUnaPruebaPeroLaFechaEsAnteriorAlInicioDeLaAsignatura(){
+		LocalDate aux = LocalDate.now().minusDays(500);
+		asignaturaSetUp.añadePrueba(aux,nombre1,descripcion1,0.9);
+	}
+	
+	@Test (expected=IllegalStateException.class)
+	public void testAñadirUnaPruebaPeroLaFechaEsPosteriorAlfinDeLaAsignatura() {
+		LocalDate aux = LocalDate.now().plusDays(500);
+		asignaturaSetUp.añadePrueba(aux,nombre1,descripcion1,0.9);
+	}
+	
+	@Test (expected=IllegalStateException.class)
+	public void testAñadirUnaPruebaPeroHayUnaPruebaConIgualNombreEnLaAsignatura() {
+		asignaturaSetUp.añadePrueba(fecha3,nombre1,descripcion1,0.1);
+		asignaturaSetUp.añadePrueba(fecha3,nombre1,descripcion1,0.9);
+	}
+	
+	@Test (expected=IllegalStateException.class)
+	public void testAñadirUnaPruebaPeroLaDescripcionEsNull() {
+		String aux = null;
+		asignaturaSetUp.añadePrueba(fecha3,nombre1,aux,0.9);
+	}
+	
+	@Test (expected=IllegalStateException.class)
+	public void testAñadirUnaPruebaPeroElNombreEsNull() {
+		String aux = null;
+		asignaturaSetUp.añadePrueba(fecha3,aux,descripcion1,0.9);
+	}
+	
 	@Test(expected=IllegalStateException.class)
 	public void testGetPruebasPeroNoHayNingunaPruebaActualmenteEnLaAsignatura() {
-		Asignatura aux = new Asignatura(nombre1, descripcion1, 10, fecha1, fecha4);
+		Asignatura aux = new Asignatura(nombre1, descripcion1, 10, dia1, fecha4);
 		aux.getPruebas();
 	}
 	@Test (expected=IllegalStateException.class)
 	public void testObtenerCalificacionesFinalesPeroLaSumaDeLosPesosNoEs1(){
-		prueba2.marcarCalificada(LocalDate.now());
-		asignaturaSetUp.añadePrueba(prueba2, 0.2);
+		asignaturaSetUp.añadePrueba(fecha2,nombre1,descripcion1,0.9);
+		for (Prueba p : asignaturaSetUp.getPruebas())
+			p.marcarCalificada(fecha2);
 		asignaturaSetUp.calificacionesFinales();
 	}
 	
 	@Test (expected=IllegalStateException.class)
 	public void testObtenerCalificacionesFinalesPeroAlgunaPruebaNoEstáCompletamenteCalificada(){
-		prueba2.marcarCalificada(LocalDate.now());
-		asignaturaSetUp.añadePrueba(prueba2, 0.2);
-		asignaturaSetUp.añadePrueba(prueba1, 0.8);
+		asignaturaSetUp.añadePrueba(fecha2,nombre1,descripcion1,0.2);
+		asignaturaSetUp.añadePrueba(fecha2,nombre1,descripcion1,0.3);
+		for (Prueba p : asignaturaSetUp.getPruebas())
+			p.marcarCalificada(fecha2);
+		asignaturaSetUp.añadePrueba(fecha2,"aux","auxAux",0.3);
 		asignaturaSetUp.calificacionesFinales();
 	}
 	
 	@Test(expected=IllegalStateException.class)
 	public void testObtenerCalificacionesParcialesPeroNoHayNingunaPrueba() {
-		Asignatura aux = new Asignatura(nombre1, descripcion1, 10, fecha1, fecha4);
+		Asignatura aux = new Asignatura(nombre1, descripcion1, 10, dia1, fecha4);
 		aux.calificacionesParciales();
 	}
 	

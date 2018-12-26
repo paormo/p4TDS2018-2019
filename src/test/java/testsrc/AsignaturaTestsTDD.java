@@ -10,7 +10,7 @@ import org.junit.Test;
 import es.uva.inf.tds.entornoeducativo.Asignatura;
 import es.uva.inf.tds.entornoeducativo.Prueba;
 
-public class AsignaturaTests {
+public class AsignaturaTestsTDD {
 	private Asignatura asignaturaSetUp;
 	LocalDate dia;
 	LocalDate dia2;
@@ -19,7 +19,7 @@ public class AsignaturaTests {
 	public void testConstructorActividad() {
 		LocalDate aux = LocalDate.now();
 		LocalDate aux2= LocalDate.now().plusDays(50);
-		Asignatura asignatura = new Asignatura("Mates", "Calculo y Algebra", 10,aux,aux2);
+		Asignatura asignatura = new Asignatura("Mates", "Calculo y Algebra", 10.0,aux,aux2);
 		assertNotNull(asignatura);
 	}
 
@@ -33,8 +33,8 @@ public class AsignaturaTests {
 	
 	@Test 
 	public void testAñadirPruebaEnAsignatura() {
-		asignaturaSetUp.añadePrueba(pruebaAux, 0.1);
-		asignaturaSetUp.getPruebas().contains(pruebaAux);
+		asignaturaSetUp.añadePrueba(dia2,"Nombre Prueba","Prueba de Prueba",10.0);
+		
 	}
 	
 	@Test
