@@ -27,9 +27,9 @@ public class PruebaSecuenciaTests {
 		prueba.calificar("Pepo",2.1,LocalDate.now().plusDays(5));
 		prueba.calificar(calificaciones, LocalDate.now().plusDays(5));
 		prueba.modificar("id2", 4.0);
-		assertEquals(2.1,prueba.getNota("Pepo"));
-		assertEquals(5.3,prueba.getNota("id1"));
-		assertEquals(4.0,prueba.getNota("id2"));
+		assertEquals(2.1,prueba.getNota("Pepo"),0);
+		assertEquals(5.3,prueba.getNota("id1"),0);
+		assertEquals(4.0,prueba.getNota("id2"),0);
 		prueba.marcarCalificada(LocalDate.now().plusDays(6));
 	}
 
