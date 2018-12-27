@@ -1,6 +1,7 @@
 package es.uva.inf.tds.entornoeducativo;
 
 import java.time.LocalDate;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 /**
@@ -9,6 +10,19 @@ import java.util.Hashtable;
  * @author anonymous
  */
 public class Prueba {
+	private String nombre;
+	private String descripcion;
+	private LocalDate fecha;
+	private double notaMax;
+	private Hashtable<String,Double> calificaciones;
+	private boolean completamenteCalificada;
+	private String errorNullFecha = "La fecha actual no puede ser nula";
+	private String errorFechaAnterior = "La fecha de calificacion no puede ser anterior a la de la prueba";
+	private String errorCompletamenteCalificada="La prueba esta completamente calificada, ya no es posible calificar mas";
+	private String errorNotaIntroducidaMayorALaMaximaDeLaPrueba="La nota no puede ser mayor a la nota maxima de la prueba";
+	private String errorIdAlumno="El id del alumno no puede ser nulo";
+	private String errorNotaMenorQue0="La nota debe ser mayor que 0";
+	private String errorElAlumnoNoTieneCalificacion;
 	
 	/**
 	 * Inicializa una prueba.
@@ -18,7 +32,17 @@ public class Prueba {
 	 * @param notaMax nota máxima que puede obtenerse en la prueba
 	 */
 	public Prueba(LocalDate fecha, String nombre, String descripcion, double notaMax){
-		// TODO 
+
+		if(fecha==null)throw new IllegalArgumentException("La fecha no puede ser nula");
+		if(nombre==null)throw new IllegalArgumentException("La descripcion no puede ser nula");
+		if(descripcion==null)throw new IllegalArgumentException("La descripcion no puede ser nula");
+		if(notaMax<0)throw new IllegalArgumentException("La nota maxima debe ser positiva");
+		this.nombre=nombre;
+		this.descripcion=descripcion;
+		this.fecha=fecha;
+		this.notaMax=notaMax;
+		calificaciones=new Hashtable<String, Double>();
+		completamenteCalificada=false;
 	}
 	
 	/**
@@ -26,8 +50,7 @@ public class Prueba {
 	 * @return true si está completamente calificada, false en otro caso
 	 */
 	public boolean isCompletamenteCalificada(){
-		// TODO cambiar, implementación falsa
-		return false;
+		return completamenteCalificada;
 	}
 	
 	/**
@@ -35,8 +58,7 @@ public class Prueba {
 	 * @return tabla hash con pares <identificador de alumno,nota>
 	 */
 	public Hashtable<String, Double> getCalificaciones(){
-		// TODO cambiar, implementación falsa
-		return null;
+		return calificaciones;
 	}
 	
 	/**
@@ -46,7 +68,9 @@ public class Prueba {
 	 * @throws IllegalStateException si no hay ninguna calificación
 	 */
 	public void marcarCalificada(LocalDate fechaActual){
-		// TODO
+		if (fechaActual.isBefore(fecha))throw new IllegalArgumentException("La fechaActual no puede ser anterior a la fecha de realizacion de la prueba");
+		if (calificaciones.size()==0)throw new IllegalArgumentException("No hay calificaciones para esta prueba");
+		completamenteCalificada=true;
 	}
 	
 	/**
@@ -61,7 +85,14 @@ public class Prueba {
 	 * @throws IllegalArgumentException si la nota supera la nota máxima de la prueba
 	 */
 	public void calificar(String id, double nota, LocalDate fechaActual){
-		// TODO
+		if (id == null)throw new IllegalArgumentException("El id del alumno no puede ser nulo");
+		if(nota<0)throw new IllegalArgumentException("La nota debe ser mayor que 0");
+		if (fechaActual==null)throw new IllegalArgumentException(errorNullFecha);
+		if (fechaActual.isBefore(fecha))throw new IllegalStateException(errorFechaAnterior);
+		if(completamenteCalificada)throw new IllegalArgumentException(errorCompletamenteCalificada);
+		if(calificaciones.containsKey(id))throw new IllegalArgumentException("El alumno '"+id+"' ya posee una calificacion en esta prueba");
+		if(nota>notaMax)throw new IllegalArgumentException(errorNotaIntroducidaMayorALaMaximaDeLaPrueba);
+		calificaciones.put(id, nota);
 	}
 	
 	/**
@@ -75,7 +106,18 @@ public class Prueba {
 	 * @throws IllegalArgumentException si alguna nota supera la nota máxima de la prueba	 
 	 */
 	public void calificar(Hashtable<String, Double> calificaciones, LocalDate fechaActual){
-		// TODO
+		if (fechaActual==null)throw new IllegalArgumentException(errorNullFecha);
+		if (fechaActual.isBefore(fecha))throw new IllegalStateException(errorFechaAnterior);
+		if(completamenteCalificada)throw new IllegalArgumentException(errorCompletamenteCalificada);
+		Enumeration<String> ids=calificaciones.keys();
+		String aux;
+		while(ids.hasMoreElements()) {
+			aux=ids.nextElement();
+			if(this.calificaciones.containsKey(aux))throw new IllegalArgumentException("El alumno con id '"+aux+"' ya posee una calificacion en esta prueba. No se añaden las calificaciones.");
+			if(calificaciones.get(aux)>notaMax)throw new IllegalArgumentException("La nota del alumno con id '" + aux + "' sobrepasa la nota maxima de la asignatura.");
+		}
+		this.calificaciones.putAll(calificaciones);
+		
 	}
 	
 	/**
@@ -86,7 +128,11 @@ public class Prueba {
 	 * @throws IllegalArgumentException si la nota supera la nota máxima de la prueba
 	 */
 	public void modificar(String id, double nota){
-		// TODO
+		if (id == null)throw new IllegalArgumentException(errorIdAlumno);
+		if(nota<0)throw new IllegalArgumentException(errorNotaMenorQue0);
+		if (nota>notaMax)throw new IllegalArgumentException(errorNotaIntroducidaMayorALaMaximaDeLaPrueba);
+		if(!calificaciones.contains(id))throw new IllegalArgumentException(errorElAlumnoNoTieneCalificacion);
+		calificaciones.replace(id, nota);
 	}
 	
 	/**
@@ -94,8 +140,8 @@ public class Prueba {
 	 * @return retorna siempre una cadena no vacía
 	 */
 	public String getNombre() {
-		// TODO cambiar, implementación falsa
-		return "";
+		
+		return nombre;
 	}
 
 	/**
@@ -103,8 +149,7 @@ public class Prueba {
 	 * @return retorna siempre una cadena no vacía
 	 */
 	public String getDescripcion() {
-		// TODO cambiar, implementación falsa
-		return "";
+		return descripcion;
 	}
 
 	/**
@@ -112,8 +157,7 @@ public class Prueba {
 	 * @return retorna siempre un número mayor que 0
 	 */
 	public double getNotaMax() {
-		// TODO cambiar, implementación falsa
-		return 0;
+		return notaMax;
 	}
 	
 	/**
@@ -122,7 +166,7 @@ public class Prueba {
 	 */
 	public LocalDate getFecha() {
 		// TODO cambiar, implementación falsa
-		return LocalDate.now();
+		return fecha;
 	}	
 
 	
@@ -130,10 +174,12 @@ public class Prueba {
 	 * Devuelve la nota de un alumno.
 	 * @param alumno es el identificador del alumno
 	 * @return la nota del alumno en la prueba
-	 * @throws IllegalArgumentException si no existe ese alumno en el listado de calificaciones de la prueba
+	 * @throws IllegalArgumentException si el alumno es null
+	 * @thorws IllegalArgumentException si no existe ese alumno en el listado de calificaciones de la prueba
 	 */
 	public double getNota(String alumno){
-		// TODO cambiar, implementación falsa
-		return 0;
+		if(alumno==null)throw new IllegalArgumentException(errorIdAlumno);
+		if(!calificaciones.containsKey(alumno))throw new IllegalArgumentException(errorElAlumnoNoTieneCalificacion);
+		return calificaciones.get(alumno);
 	}
 }
