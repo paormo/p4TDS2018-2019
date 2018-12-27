@@ -13,9 +13,10 @@ import es.uva.inf.tds.entornoeducativo.Prueba;
 @Category({TDD.class,Unit.class})
 public class AsignaturaTestsTDD {
 	private Asignatura asignaturaSetUp;
-	LocalDate dia;
-	LocalDate dia2;
-	Prueba pruebaAux;
+	private LocalDate dia;
+	private LocalDate dia2;
+	private Prueba pruebaAux;
+	private Asignatura asignaturaSetUp2;
 	@Test 
 	public void testConstructorActividad() {
 		LocalDate aux = LocalDate.now();
@@ -35,18 +36,23 @@ public class AsignaturaTestsTDD {
 		dia = LocalDate.now();
 		dia2= LocalDate.now().plusDays(50);
 		asignaturaSetUp = new Asignatura("Lengua", "Literatura y Análisis sintáctico", 10,dia,dia2);
-		pruebaAux=new Prueba(LocalDate.now().plusDays(2), "Examen 1", "Prueba referente a los temas 1 y 2", 10.0);
+		asignaturaSetUp2 = new Asignatura("Lengua", "Literatura y Análisis sintáctico", 10,dia,dia2);
+		asignaturaSetUp.añadePrueba(LocalDate.now().plusDays(2), "Examen 1", "Prueba referente a los temas 1 y 2", 1, 10.0);
 	}
 	
 	@Test 
 	public void testAñadirPruebaEnAsignatura() {
-		asignaturaSetUp.añadePrueba(dia2,"Nombre Prueba","Prueba de Prueba",0.2,10.0);
-		fail();
+		asignaturaSetUp2.añadePrueba(dia2,"Nombre Prueba","Prueba de Prueba",0.2,10.0);
+		assertEquals("Nombre Prueba",asignaturaSetUp2.getPrueba("Nombre Prueba").getNombre());
 		
 	}
 	
 	@Test
 	public void testObtenerCalificacionesFinalesDeLaAsignatura() {
+		for(Prueba p :asignaturaSetUp.getPruebas()) {
+			p.calificar("pepe", 5,dia2);
+			p.marcarCalificada(dia2);
+		}
 		assertNotNull(asignaturaSetUp.calificacionesFinales());
 	}
 	

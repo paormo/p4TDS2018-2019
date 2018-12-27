@@ -69,8 +69,9 @@ public class PruebaTestNoValidos {
 		fecha2=LocalDate.now().plusDays(10);
 		fecha3=LocalDate.now().plusDays(20);
 		fecha4=LocalDate.now().plusDays(30);
+		fechaVieja=LocalDate.now().minusDays(30);
 		prueba1=new Prueba(fecha2,"Examen1", "Tipo Test", 10.0);
-		prueba1.calificar("PepeElTramas",5,fecha1);
+		prueba1.calificar("PepeElTramas",5,fecha3);
 		prueba2=new Prueba(fecha3,"Examen2", "Tipo Desarrollar", 5.0);
 		idAlumno1="pepe";
 		calificacionesAux = new Hashtable<String, Double>();
@@ -94,7 +95,7 @@ public class PruebaTestNoValidos {
 	}
 	
 	@Test(expected=IllegalStateException.class)
-	public void testCalificarPeroLaPruebaEstaCompletamenteCalificadaa () {
+	public void testCalificarPeroLaPruebaEstaCompletamenteCalificada () {
 		prueba2.marcarCalificada(fecha4);
 		prueba2.calificar(idAlumno1, 4.3, fecha2);
 	}
