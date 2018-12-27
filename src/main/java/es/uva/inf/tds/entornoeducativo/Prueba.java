@@ -176,7 +176,7 @@ public class Prueba {
 			throw new IllegalArgumentException(errorNotaMenorQue0);
 		if (nota > notaMax)
 			throw new IllegalArgumentException(errorNotaIntroducidaMayorALaMaximaDeLaPrueba);
-		if (!calificaciones.contains(id))
+		if (!calificaciones.containsKey(id))
 			throw new IllegalArgumentException(errorElAlumnoNoTieneCalificacion);
 		calificaciones.replace(id, nota);
 	}
