@@ -33,10 +33,11 @@ public class Asignatura {
 	 * @throws IllegalArgumentException Si el nombre es null
 	 * @throws IllegalArgumentException Si existe una prueba en la asignatura con ese nombre
 	 * @throws IllegalArgumentException Si la descripcion es null
+	 * @throws IllegalArgumentException Si la notaMaxima es menor a 0
 	 * @throws IllegalArgumentException Si el peso en la asignatura es null, menor a 0 o mayor a 1
 	 * @throws IllegalStateException Si al añadir esta prueba a la asignatura el peso total pasa de 1
 	 */
-	public void añadePrueba(LocalDate fechaPrueba,String nombre, String descripcion,  double pesoEnLaAsignatura) {
+	public void añadePrueba(LocalDate fechaPrueba,String nombre, String descripcion,  double pesoEnLaAsignatura,double notaMax) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -65,6 +66,26 @@ public class Asignatura {
 	 * @return Tabla conteniendo los pares alumno-nota parcial de la asignatura 
 	 */
 	public Hashtable<String, Integer> calificacionesParciales() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public String getNombre() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public String getDescripcion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public double getCalificacionMaxima() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	public LocalDate getFechaInicio() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public LocalDate getFechaFinalizacion() {
 		// TODO Auto-generated method stub
 		return null;
 	}
