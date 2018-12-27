@@ -69,5 +69,25 @@ public class Asignatura {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public String getNombre() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public String getDescripcion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public double getCalificacionMaxima() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	public LocalDate getFechaInicio() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public LocalDate getFechaFinalizacion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
