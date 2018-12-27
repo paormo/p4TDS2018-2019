@@ -22,7 +22,12 @@ public class AsignaturaTestsTDD {
 		LocalDate aux2= LocalDate.now().plusDays(50);
 		Asignatura asignatura = new Asignatura("Mates", "Calculo y Algebra", 10.0,aux,aux2);
 		assertNotNull(asignatura);
-		fail();
+		assertEquals("Mates",asignatura.getNombre());
+		assertEquals("Calculo y Algebra",asignatura.getDescripcion());
+		assertEquals(10.0,asignatura.getCalificacionMaxima(),0.1);
+		assertEquals("Mates",asignatura.getNombre());
+		assertEquals(LocalDate.now(),asignatura.getFechaInicio());
+		assertEquals(LocalDate.now().plusDays(50),asignatura.getFechaFinalizacion());
 	}
 
 	@Before
@@ -35,7 +40,7 @@ public class AsignaturaTestsTDD {
 	
 	@Test 
 	public void testAñadirPruebaEnAsignatura() {
-		asignaturaSetUp.añadePrueba(dia2,"Nombre Prueba","Prueba de Prueba",10.0);
+		asignaturaSetUp.añadePrueba(dia2,"Nombre Prueba","Prueba de Prueba",0.2,10.0);
 		fail();
 		
 	}
