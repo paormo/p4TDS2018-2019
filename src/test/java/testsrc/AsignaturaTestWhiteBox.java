@@ -69,6 +69,12 @@ public class AsignaturaTestWhiteBox {
 		asignaturaSetUp.calificacionesFinales();
 	}
 	
+	@Test 
+	public void testCalificacionesParciales() {
+		asignaturaSetUp.getPrueba("Examen3").calificar(nombre1,3.0,fecha3);
+		assertNotNull(asignaturaSetUp.calificacionesParciales());
+	}
+	
 	
 	
 	
