@@ -22,11 +22,10 @@ public class AsignaturaTestNoValidos {
 	private String nombre1;
 	private String nombre2;
 	private String descripcion1;
-	private String descripcion2; 
-	private Prueba prueba1;
-	private Prueba prueba2;
+
 	
 
+	@SuppressWarnings("unused")
 	@Test (expected=IllegalArgumentException.class)
 	public void testNombreEnConstructorNull() {
 		LocalDate aux= LocalDate.now();
@@ -35,12 +34,14 @@ public class AsignaturaTestNoValidos {
 		
 	}
 	
+	@SuppressWarnings("unused")
 	@Test (expected=IllegalArgumentException.class)
 	public void testDescripcionEnConstructorNull() {
 		LocalDate aux= LocalDate.now();
 		LocalDate aux2 = LocalDate.now().plusDays(2);
 		Asignatura asignatura = new Asignatura("Nombre", null, 10, aux, aux2 );
 	}
+	@SuppressWarnings("unused")
 	@Test (expected=IllegalArgumentException.class)
 	public void testNotaMaximaAsignaturanEnConstructorMenorQue0() {
 		LocalDate aux= LocalDate.now();
@@ -48,12 +49,14 @@ public class AsignaturaTestNoValidos {
 		Asignatura asignatura = new Asignatura("Nombre","Descripcion", -1, aux, aux2 );
 	}
 	
+	@SuppressWarnings("unused")
 	@Test (expected=IllegalArgumentException.class)
 	public void testAsignaturaAlgunaFechanEnConstructorNull1() {
 		LocalDate aux= null;
 		LocalDate aux2 = LocalDate.now().plusDays(2);
 		Asignatura asignatura = new Asignatura("Nombre","Descripcion", 10, aux, aux2 );
 	}
+	@SuppressWarnings("unused")
 	@Test (expected=IllegalArgumentException.class)
 	public void testAsignaturaAlgunaFechanEnConstructorNull2() {
 		LocalDate aux=LocalDate.now();
@@ -66,15 +69,17 @@ public class AsignaturaTestNoValidos {
 		nombre1="Matematicas";
 		nombre2="Lengua Castellana";
 		descripcion1="Cálculo y algebra";
-		descripcion2="Literatura y análisis sintáctico";
+		
 		dia1=LocalDate.now();
 		fecha2=LocalDate.now().plusDays(10);
 		fecha3=LocalDate.now().plusDays(20);
 		fecha4=LocalDate.now().plusDays(30);
-		prueba1=new Prueba(fecha2,"Examen1", "Tipo Test", 10.0);
-		prueba2=new Prueba(fecha3,"Examen2", "Tipo Desarrollar", 5.0);
+	
 		asignaturaSetUp=new Asignatura(nombre1, descripcion1, 10, dia1, fecha4);
+		asignaturaSetUp.añadePrueba(fecha2, "Examen3", "LOLOL", 0.0, 5);
 	}
+	
+	
 	
 	@Test (expected=IllegalArgumentException.class)
 	public void testAñadirUnaPruebaPeroElPesoEnLaNotaEsMenorA0(){
