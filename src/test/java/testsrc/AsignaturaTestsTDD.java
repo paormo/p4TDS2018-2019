@@ -43,12 +43,12 @@ public class AsignaturaTestsTDD {
 		dia2= LocalDate.now().plusDays(50);
 		asignaturaSetUp = new Asignatura("Lengua", "Literatura y Análisis sintáctico", 10,dia,dia2);
 		asignaturaSetUp2 = new Asignatura("Lengua", "Literatura y Análisis sintáctico", 10,dia,dia2);
-		asignaturaSetUp.añadePrueba(LocalDate.now().plusDays(2), "Examen 1", "Prueba referente a los temas 1 y 2", 1, 10.0);
+		asignaturaSetUp.nuevaPrueba(LocalDate.now().plusDays(2), "Examen 1", "Prueba referente a los temas 1 y 2", 1, 10.0);
 	}
 	
 	@Test 
 	public void testAñadirPruebaEnAsignatura() {
-		asignaturaSetUp2.añadePrueba(dia2,"Nombre Prueba","Prueba de Prueba",0.2,10.0);
+		asignaturaSetUp2.nuevaPrueba(dia2,"Nombre Prueba","Prueba de Prueba",0.2,10.0);
 		assertEquals("Nombre Prueba",asignaturaSetUp2.getPrueba("Nombre Prueba").getNombre());
 		
 	}

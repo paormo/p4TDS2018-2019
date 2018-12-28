@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.Hashtable;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -37,7 +37,7 @@ public class AsignaturaTestWhiteBox {
 		fecha4=LocalDate.now().plusDays(30);
 	
 		asignaturaSetUp=new Asignatura(nombre1, descripcion1, 10, dia1, fecha4);
-		asignaturaSetUp.añadePrueba(fecha2, "Examen3", "LOLOL", 0.0, 5);
+		asignaturaSetUp.nuevaPrueba(fecha2, "Examen3", "LOLOL", 0.0, 5);
 	}
 	
 	@SuppressWarnings("unused")
@@ -49,7 +49,7 @@ public class AsignaturaTestWhiteBox {
 	
 	@Test (expected=IllegalArgumentException.class)
 	public void testAñadePruebaPeroLaNotaMaximaDeLaAsignaturaEsMenorQue0() {
-		asignaturaSetUp.añadePrueba(fecha3,nombre1, descripcion1, 0.1, -1);
+		asignaturaSetUp.nuevaPrueba(fecha3,nombre1, descripcion1, 0.1, -1);
 		
 	}
 	
@@ -71,7 +71,7 @@ public class AsignaturaTestWhiteBox {
 	
 	@Test (expected=IllegalArgumentException.class)
 	public void testCalificacionesFinalesPeroAlgunaPruebaNoEstaCompletamenteCalificada() {
-		asignaturaSetUp.añadePrueba(fecha2, "Examen4", "LOLOL", 1, 5);
+		asignaturaSetUp.nuevaPrueba(fecha2, "Examen4", "LOLOL", 1, 5);
 		asignaturaSetUp.calificacionesFinales();
 	}
 	

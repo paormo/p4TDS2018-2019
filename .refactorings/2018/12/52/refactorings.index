@@ -10,3 +10,4 @@
 1545763018143	Rename type 'AsignaturaTests'
 1545826613426	Rename field 'fecha1'
 1545838669882	Rename type 'AsignaturaAllTests'
+1546018640147	Rename method 'añadePrueba'

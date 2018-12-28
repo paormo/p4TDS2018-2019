@@ -84,7 +84,7 @@ public class Asignatura {
 	 * @throws IllegalStateException    Si al añadir esta prueba a la asignatura el
 	 *                                  peso total pasa de 1
 	 */
-	public void añadePrueba(LocalDate fechaPrueba, String nombre, String descripcion, double pesoEnLaAsignatura,
+	public void nuevaPrueba(LocalDate fechaPrueba, String nombre, String descripcion, double pesoEnLaAsignatura,
 			double notaMax) {
 		if (fechaPrueba == null)
 			throw new IllegalArgumentException("La fecha de la prueba no puede ser nula");
