@@ -3,7 +3,10 @@ package es.uva.inf.tds.entornoeducativo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Asignatura de una materia. Almacena pruebas. Permite obtener calificaciones
@@ -20,7 +23,7 @@ public class Asignatura {
 	private LocalDate diainicio;
 	private LocalDate diaFin;
 	private ArrayList<Prueba> pruebasAsignatura;
-	private Hashtable<String, Double> pesosPruebas;
+	private HashMap<String, Double> pesosPruebas;
 	private double pesoTotalActual;
 
 	/**
@@ -56,7 +59,7 @@ public class Asignatura {
 		this.diainicio = diaInicio;
 		this.diaFin = diaFin;
 		pruebasAsignatura = new ArrayList<Prueba>();
-		pesosPruebas = new Hashtable<String, Double>();
+		pesosPruebas = new HashMap<String, Double>();
 		pesoTotalActual = 0.0;
 
 	}
@@ -117,8 +120,8 @@ public class Asignatura {
 	 * @return Arraylist con las pruebas de la asignatura
 	 * @throws IllegalStateException Si la asignatura no tiene pruebas
 	 */
-	public ArrayList<Prueba> getPruebas() {
-		if (pruebasAsignatura.size() == 0)
+	public List<Prueba> getPruebas() {
+		if (pruebasAsignatura.isEmpty())
 			throw new IllegalArgumentException("La asignatura no tiene ninguna prueba aun");
 		return pruebasAsignatura;
 	}
@@ -152,7 +155,7 @@ public class Asignatura {
 	 *                               calificada
 	 * @return Tabla conteniendo a los alumnos y sus calificaciones finales
 	 */
-	public Hashtable<String, Double> calificacionesFinales() {
+	public Map<String, Double> calificacionesFinales() {
 		if (pesoTotalActual != 1)
 			throw new IllegalStateException("La suma de pesos de la asignatura no es 1");
 		for (Prueba p : pruebasAsignatura) {
@@ -160,10 +163,20 @@ public class Asignatura {
 				throw new IllegalArgumentException(
 						"La Prueba '" + p.getNombre() + "' no está completamente calificada");
 		}
-		Hashtable<String, Double> calificacionesFinales = new Hashtable<String, Double>();
+		HashMap<String, Double> calificacionesFinales = new HashMap<String, Double>();
 		Enumeration<String> idsPrueba;
 		for (Prueba pr : pruebasAsignatura) {// recorremos todas las pruebas de la asignatura
-			idsPrueba = pr.getCalificaciones().keys();// Ids de los alumnos de una prueba para recorrerlo
+			for(String id : pr.getCalificaciones().keySet()) {
+				if (!calificacionesFinales.containsKey(id))
+					calificacionesFinales.put(id, 0.0);
+				
+				calificacionesFinales.put(id, calificacionesFinales.get(id)
+						+ (pr.getCalificaciones().get(id) * pesosPruebas.get(pr.getNombre())));
+			}
+			
+			
+			
+			/*idsPrueba = pr.getCalificaciones().keys();// Ids de los alumnos de una prueba para recorrerlo
 			String key;
 			while (idsPrueba.hasMoreElements()) {// Recorremos las calificaciones de una Prueba
 				key = idsPrueba.nextElement();
@@ -174,8 +187,7 @@ public class Asignatura {
 						+ (pr.getCalificaciones().get(key) * pesosPruebas.get(pr.getNombre())));// Vamos sumando a la
 																								// nota final la nota
 																								// ponderada de la
-																								// prueba
-			}
+																								// prueba*/
 		}
 		return calificacionesFinales;
 	}
@@ -186,12 +198,17 @@ public class Asignatura {
 	 * @throws IllegalStateException Si no hay pruebas en la asignatura
 	 * @return Tabla conteniendo los pares alumno-nota parcial de la asignatura
 	 */
-	public Hashtable<String, Double> calificacionesParciales() {
-		if(pruebasAsignatura.size()==0)throw new IllegalStateException("La asignatura no posee ninguna prueba todavía");
-		Hashtable<String, Double> calificacionesParciales = new Hashtable<String, Double>();
-		Enumeration<String> idsPrueba;
+	public Map<String, Double> calificacionesParciales() {
+		if(pruebasAsignatura.isEmpty())throw new IllegalStateException("La asignatura no posee ninguna prueba todavía");
+		Map<String, Double> calificacionesParciales = new HashMap<String, Double>();
 		for (Prueba pr : pruebasAsignatura) {// recorremos todas las pruebas de la asignatura
-			idsPrueba = pr.getCalificaciones().keys();// Ids de los alumnos de una prueba para recorrerlo
+			for(String id : pr.getCalificaciones().keySet()) {
+				if (!calificacionesParciales.containsKey(id))
+					calificacionesParciales.put(id, 0.0);
+				calificacionesParciales.put(id, calificacionesParciales.get(id)
+						+ (pr.getCalificaciones().get(id) * pesosPruebas.get(pr.getNombre())));
+			}
+			/*idsPrueba = pr.getCalificaciones().keys();// Ids de los alumnos de una prueba para recorrerlo
 			String key;
 			while (idsPrueba.hasMoreElements()) {// Recorremos las calificaciones de una Prueba
 				key = idsPrueba.nextElement();
@@ -202,9 +219,8 @@ public class Asignatura {
 						+ (pr.getCalificaciones().get(key) * pesosPruebas.get(pr.getNombre())));// Vamos sumando a la
 																								// nota final la nota
 																								// ponderada de la
-																								// prueba
+																								// prueba*/
 			}
-		}
 		return calificacionesParciales;
 	}
 
