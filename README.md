@@ -1,12 +1,12 @@
-# Practica 3
+# Practica 4
 
 ## Autores
 
 	paborte -- Pablo Ortega Molineto
 
-## Tiempo total en horas-hombre empleado
+## Tiempo total en horas empleado
 
-23 horas por persona
+18 horas aproximadamente
 	
 ## Clases que conforman la solucion
 	
