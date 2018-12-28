@@ -3,7 +3,7 @@ package testsrc;
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
-import java.util.Hashtable;
+import java.util.HashMap;
 
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -12,14 +12,13 @@ import es.uva.inf.tds.entornoeducativo.Prueba;
 @Category(Sequence.class)
 public class PruebaSecuenciaTests {
 
-	@SuppressWarnings("deprecation")
 	@Test
 	public void testSecuenciaTest1() {	
 		LocalDate fecha = LocalDate.now();
 		String nombre = "Examen";
 		String descripcion = "Hola";
 		double notaMax= 5.3;
-		Hashtable<String, Double> calificaciones = new Hashtable<String, Double>();
+		HashMap<String, Double> calificaciones = new HashMap<String, Double>();
 		calificaciones.put("id1", 5.3);
 		calificaciones.put("id2", 4.5);
 		calificaciones.put("paco", 3.2);

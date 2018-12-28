@@ -15,7 +15,6 @@ public class AsignaturaTestsTDD {
 	private Asignatura asignaturaSetUp;
 	private LocalDate dia;
 	private LocalDate dia2;
-	private Prueba pruebaAux;
 	private Asignatura asignaturaSetUp2;
 	@Test 
 	public void testConstructorActividad() {

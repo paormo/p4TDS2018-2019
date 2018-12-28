@@ -17,13 +17,11 @@ public class AsignaturaTestWhiteBox {
 	private LocalDate fecha3;
 	private LocalDate fecha4;
 	private String nombre1;
-	private String nombre2;
 	private String descripcion1;
 
 	@Before
 	public void setUp() throws Exception {
 		nombre1="Matematicas";
-		nombre2="Lengua Castellana";
 		descripcion1="Cálculo y algebra";
 		
 		dia1=LocalDate.now();
@@ -35,6 +33,7 @@ public class AsignaturaTestWhiteBox {
 		asignaturaSetUp.añadePrueba(fecha2, "Examen3", "LOLOL", 0.0, 5);
 	}
 	
+	@SuppressWarnings("unused")
 	@Test (expected=IllegalArgumentException.class)
 	public void testConstructorAsignaturaPeroLaFechaFinEsAntesDELaFechaDeInicio() {
 		Asignatura asig = new Asignatura(nombre1, descripcion1, 10, fecha3, fecha2);

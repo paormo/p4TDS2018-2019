@@ -1,7 +1,7 @@
 package testsrc;
 
 import java.time.LocalDate;
-import java.util.Hashtable;
+import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,14 +17,12 @@ public class PruebaTestNoValidos {
 	private LocalDate fecha3;
 	private LocalDate fecha4;
 	private String nombre1;
-	private String nombre2;
 	private String descripcion1;
-	private String descripcion2; 
 	private Prueba prueba1;
 	private Prueba prueba2;
 	private LocalDate fechaVieja;
 	private String idAlumno1;
-	private Hashtable<String, Double >calificacionesAux;
+	private HashMap<String, Double >calificacionesAux;
 	
 	@SuppressWarnings("unused")
 	@Test(expected=IllegalArgumentException.class)
@@ -62,9 +60,7 @@ public class PruebaTestNoValidos {
 	@Before
 	public void setUp() throws Exception {
 		nombre1="Examen1";
-		nombre2="Examen2";
 		descripcion1="TEST";
-		descripcion2="NORMAL";
 		fecha1=LocalDate.now();
 		fecha2=LocalDate.now().plusDays(10);
 		fecha3=LocalDate.now().plusDays(20);
@@ -74,7 +70,7 @@ public class PruebaTestNoValidos {
 		prueba1.calificar("PepeElTramas",5,fecha3);
 		prueba2=new Prueba(fecha3,"Examen2", "Tipo Desarrollar", 5.0);
 		idAlumno1="pepe";
-		calificacionesAux = new Hashtable<String, Double>();
+		calificacionesAux = new HashMap<String, Double>();
 		calificacionesAux.put("Paquito",3.2);
 		calificacionesAux.put("Nachito",3.3);
 	}

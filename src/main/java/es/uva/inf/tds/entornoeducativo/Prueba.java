@@ -1,8 +1,9 @@
 package es.uva.inf.tds.entornoeducativo;
 
 import java.time.LocalDate;
-import java.util.Enumeration;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Prueba de una asignatura. Puede calificarse. Tiene tanto un nombre, una breve
@@ -15,7 +16,7 @@ public class Prueba {
 	private String descripcion;
 	private LocalDate fecha;
 	private double notaMax;
-	private Hashtable<String, Double> calificaciones;
+	private HashMap<String, Double> calificaciones;
 	private boolean completamenteCalificada;
 	private String errorNullFecha = "La fecha actual no puede ser nula";
 	private String errorFechaAnterior = "La fecha de calificacion no puede ser anterior a la de la prueba";
@@ -47,7 +48,7 @@ public class Prueba {
 		this.descripcion = descripcion;
 		this.fecha = fecha;
 		this.notaMax = notaMax;
-		calificaciones = new Hashtable<String, Double>();
+		calificaciones = new HashMap<>();
 		completamenteCalificada = false;
 	}
 
@@ -65,7 +66,7 @@ public class Prueba {
 	 * 
 	 * @return tabla hash con pares <identificador de alumno,nota>
 	 */
-	public Hashtable<String, Double> getCalificaciones() {
+	public Map<String, Double> getCalificaciones() {
 		return calificaciones;
 	}
 
@@ -139,24 +140,24 @@ public class Prueba {
 	 * @throws IllegalArgumentException si alguna nota supera la nota máxima de la
 	 *                                  prueba
 	 */
-	public void calificar(Hashtable<String, Double> calificaciones, LocalDate fechaActual) {
+	public void calificar(Map<String, Double> calificaciones, LocalDate fechaActual) {
 		if (fechaActual == null)
 			throw new IllegalArgumentException(errorNullFecha);
 		if (fechaActual.isBefore(fecha))
 			throw new IllegalStateException(errorFechaAnterior);
 		if (completamenteCalificada)
 			throw new IllegalStateException(errorCompletamenteCalificada);
-		Enumeration<String> ids = calificaciones.keys();
-		String aux;
-		while (ids.hasMoreElements()) {
-			aux = ids.nextElement();
-			if (this.calificaciones.containsKey(aux))
-				throw new IllegalArgumentException("El alumno con id '" + aux
+		Set<String> ids = ((HashMap<String, Double>) calificaciones).keySet();
+		for (String id : ids) {
+			if (this.calificaciones.containsKey(id))
+				throw new IllegalArgumentException("El alumno con id '" + id
 						+ "' ya posee una calificacion en esta prueba. No se añaden las calificaciones.");
-			if (calificaciones.get(aux) > notaMax)
+			if (calificaciones.get(id) > notaMax)
 				throw new IllegalArgumentException(
-						"La nota del alumno con id '" + aux + "' sobrepasa la nota maxima de la asignatura.");
+						"La nota del alumno con id '" + id + "' sobrepasa la nota maxima de la asignatura.");
 		}
+		
+		
 		this.calificaciones.putAll(calificaciones);
 	}
 
@@ -215,7 +216,6 @@ public class Prueba {
 	 * @return fecha conectada (no null).
 	 */
 	public LocalDate getFecha() {
-		// TODO cambiar, implementación falsa
 		return fecha;
 	}
 
