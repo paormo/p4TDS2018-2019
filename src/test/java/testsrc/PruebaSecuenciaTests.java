@@ -9,6 +9,13 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import es.uva.inf.tds.entornoeducativo.Prueba;
+
+/**
+ * Test de secuencia para la clase Prueba 
+ * 
+ * @author paborte
+ *
+ */
 @Category(Sequence.class)
 public class PruebaSecuenciaTests {
 

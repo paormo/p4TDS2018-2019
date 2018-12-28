@@ -26,7 +26,7 @@ import es.uva.inf.tds.entornoeducativo.Prueba;
 /**
  * Test de Caja Blanca para Asignatura
  * 
- * @author lucgonz
+ * @author paborte
  *
  */
 

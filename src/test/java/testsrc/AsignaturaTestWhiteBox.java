@@ -9,6 +9,13 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import es.uva.inf.tds.entornoeducativo.Asignatura;
+
+/**
+ * Test de Caja Blanca para Asignatura
+ * 
+ * @author paborte
+ *
+ */
 @Category({Unit.class,WhiteBox.class})
 public class AsignaturaTestWhiteBox {
 	private Asignatura asignaturaSetUp;

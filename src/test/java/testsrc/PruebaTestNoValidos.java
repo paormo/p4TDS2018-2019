@@ -9,6 +9,13 @@ import org.junit.experimental.categories.Category;
 
 import es.uva.inf.tds.entornoeducativo.Prueba;
 
+/**
+ * Test de Black Box para la clase Prueba 
+ * 
+ * @author paborte
+ *
+ */
+
 @Category({Unit.class,BlackBoxTestFirst.class})
 public class PruebaTestNoValidos {
 

@@ -10,6 +10,13 @@ import org.junit.experimental.categories.Category;
 
 import es.uva.inf.tds.entornoeducativo.Asignatura;
 import es.uva.inf.tds.entornoeducativo.Prueba;
+
+/**
+ * Test de TDD para Asignatura
+ * 
+ * @author paborte
+ *
+ */
 @Category({TDD.class,Unit.class})
 public class AsignaturaTestsTDD {
 	private Asignatura asignaturaSetUp;
