@@ -3,6 +3,7 @@ package testsrc;
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Hashtable;
 
 import org.junit.Before;
@@ -10,6 +11,13 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import es.uva.inf.tds.entornoeducativo.Prueba;
+/**
+ * Test de CAja Blanca para la clase Prueba 
+ * 
+ * @author paborte
+ *
+ */
+
 @Category({Unit.class, WhiteBox.class})
 public class PruebaTestWhiteBox {
 	private LocalDate fecha1;
@@ -18,20 +26,26 @@ public class PruebaTestWhiteBox {
 	private String nombre1;
 	private String descripcion1;
 	private Prueba prueba1;
-	private Hashtable<String, Double> calificacionesAux;
+	private HashMap<String, Double> calificacionesAux;
+	private String paco;
+	private String nacho;
+	private double notaPaco;
+	private double notaNacho;
 
 	@Before
 	public void setUp() throws Exception {
 		nombre1 = "Examen1";
+		paco="paquito";
+		nacho="Nachito";
 		descripcion1="Descripcion1";
 		fecha1 = LocalDate.now();
 		fecha2 = LocalDate.now().plusDays(10);
 		fecha3 = LocalDate.now().plusDays(20);
 		prueba1 = new Prueba(fecha2, "Examen1", "Tipo Test", 10.0);
 		prueba1.calificar("PepeElTramas", 5, fecha3);
-		calificacionesAux = new Hashtable<String, Double>();
-		calificacionesAux.put("Paquito", 3.2);
-		calificacionesAux.put("Nachito", 3.3);
+		calificacionesAux = new HashMap<String, Double>();
+		calificacionesAux.put(paco, notaPaco);
+		calificacionesAux.put(nacho, notaNacho);
 	}
 	
 	@Test 
@@ -101,6 +115,30 @@ public class PruebaTestWhiteBox {
 	public void testGetNotaPeroElIdDelAlumnoEsNull() {
 		String aux= null;
 		prueba1.getNota(aux);
+	}
+	
+	@Test
+	public void testCalificarVariosALaVez() {
+		prueba1.calificar(calificacionesAux,fecha3);
+		assertEquals(notaNacho,prueba1.getNota(nacho),0.0);
+		assertEquals(notaPaco,prueba1.getNota(paco),0.0);
+	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testModificarPeroElAlumnoNoTieneUnaCalificacionAun() {
+		prueba1.modificar("Pepe", 5);
+	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testGetNotaPeroElAlumnoNoTieneNota() {
+		prueba1.getNota("Pepe");
+	}
+	
+	@Test
+	public void testPonerVariasCalificacionesALaVez() {
+		prueba1.calificar(calificacionesAux, fecha3);
+		assertEquals(notaPaco,prueba1.getNota(paco),0.0);
+		assertEquals(notaNacho,prueba1.getNota(nacho),0.0);
 	}
 	
 }

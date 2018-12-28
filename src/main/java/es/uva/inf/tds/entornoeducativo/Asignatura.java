@@ -135,13 +135,15 @@ public class Asignatura {
 	public Prueba getPrueba(String nombrePrueba) {
 		if (nombrePrueba == null)
 			throw new IllegalArgumentException("El nombre que se pasa como argumento no puede ser nulo");
-		if (!pesosPruebas.containsKey(nombrePrueba))
+		if (!pesosPruebas.containsKey(nombrePrueba)) {
 			throw new IllegalArgumentException("La prueba no esta en esta asignatura");
-		for (Prueba p : pruebasAsignatura) {
-			if (p.getNombre().equals(nombrePrueba))
-				return p;
 		}
-		return null;
+			for (Prueba p : pruebasAsignatura) {
+				if (p.getNombre().equals(nombrePrueba))
+					return p;
+		}
+			return null;
+		
 	}
 
 	/**

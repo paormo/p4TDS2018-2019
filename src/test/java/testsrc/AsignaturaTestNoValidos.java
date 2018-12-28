@@ -9,7 +9,12 @@ import org.junit.experimental.categories.Category;
 
 import es.uva.inf.tds.entornoeducativo.Asignatura;
 import es.uva.inf.tds.entornoeducativo.Prueba;
-
+/**
+ * Test de Caja Negra para Asignatura
+ * 
+ * @author paborte
+ *
+ */
 
 @Category({Unit.class,BlackBoxTestFirst.class})
 public class AsignaturaTestNoValidos {
