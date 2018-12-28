@@ -15,7 +15,6 @@ public class PruebaTestWhiteBox {
 	private LocalDate fecha1;
 	private LocalDate fecha2;
 	private LocalDate fecha3;
-	private LocalDate fecha4;
 	private String nombre1;
 	private String descripcion1;
 	private Prueba prueba1;
@@ -28,7 +27,6 @@ public class PruebaTestWhiteBox {
 		fecha1 = LocalDate.now();
 		fecha2 = LocalDate.now().plusDays(10);
 		fecha3 = LocalDate.now().plusDays(20);
-		fecha4 = LocalDate.now().plusDays(30);
 		prueba1 = new Prueba(fecha2, "Examen1", "Tipo Test", 10.0);
 		prueba1.calificar("PepeElTramas", 5, fecha3);
 		calificacionesAux = new Hashtable<String, Double>();

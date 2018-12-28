@@ -48,7 +48,7 @@ public class Prueba {
 		this.descripcion = descripcion;
 		this.fecha = fecha;
 		this.notaMax = notaMax;
-		calificaciones = new HashMap<String, Double>();
+		calificaciones = new HashMap<>();
 		completamenteCalificada = false;
 	}
 
@@ -158,16 +158,6 @@ public class Prueba {
 		}
 		
 		
-		/*String aux;
-		while (ids.hasMoreElements()) {
-			aux = ids.nextElement();
-			if (this.calificaciones.containsKey(aux))
-				throw new IllegalArgumentException("El alumno con id '" + aux
-						+ "' ya posee una calificacion en esta prueba. No se añaden las calificaciones.");
-			if (calificaciones.get(aux) > notaMax)
-				throw new IllegalArgumentException(
-						"La nota del alumno con id '" + aux + "' sobrepasa la nota maxima de la asignatura.");
-		}*/
 		this.calificaciones.putAll(calificaciones);
 	}
 

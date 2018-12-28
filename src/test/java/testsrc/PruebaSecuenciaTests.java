@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.Hashtable;
 
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -13,7 +12,6 @@ import es.uva.inf.tds.entornoeducativo.Prueba;
 @Category(Sequence.class)
 public class PruebaSecuenciaTests {
 
-	@SuppressWarnings("deprecation")
 	@Test
 	public void testSecuenciaTest1() {	
 		LocalDate fecha = LocalDate.now();

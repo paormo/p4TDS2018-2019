@@ -2,7 +2,6 @@ package testsrc;
 
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.Hashtable;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,9 +17,7 @@ public class PruebaTestNoValidos {
 	private LocalDate fecha3;
 	private LocalDate fecha4;
 	private String nombre1;
-	private String nombre2;
 	private String descripcion1;
-	private String descripcion2; 
 	private Prueba prueba1;
 	private Prueba prueba2;
 	private LocalDate fechaVieja;
@@ -63,9 +60,7 @@ public class PruebaTestNoValidos {
 	@Before
 	public void setUp() throws Exception {
 		nombre1="Examen1";
-		nombre2="Examen2";
 		descripcion1="TEST";
-		descripcion2="NORMAL";
 		fecha1=LocalDate.now();
 		fecha2=LocalDate.now().plusDays(10);
 		fecha3=LocalDate.now().plusDays(20);
