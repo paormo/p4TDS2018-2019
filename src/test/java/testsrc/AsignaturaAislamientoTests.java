@@ -5,10 +5,7 @@ import static org.junit.Assert.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
 
 import org.easymock.Mock;
 import static org.easymock.EasyMock.createMock;
@@ -66,7 +63,7 @@ public class AsignaturaAislamientoTests {
       }
 
       @Override
-      public void añadePrueba(LocalDate fecha, String nombre, String descripcion, 
+      public void nuevaPrueba(LocalDate fecha, String nombre, String descripcion, 
           double pesoEnLaAsignatura,double notaMax) {
         // TODO Auto-generated method stub
       }
@@ -94,8 +91,8 @@ public class AsignaturaAislamientoTests {
     replay(auxPrueba1);
     replay(auxPrueba2);
 
-    auxAsignatura.añadePrueba(auxFechaCalificacion, "Prueba 1", "Descripcion 1", 10.0, 0.5);
-    auxAsignatura.añadePrueba(auxFechaCalificacion, "Prueba 2", "Descripcion 2", 5.0, 0.5);
+    auxAsignatura.nuevaPrueba(auxFechaCalificacion, "Prueba 1", "Descripcion 1", 10.0, 0.5);
+    auxAsignatura.nuevaPrueba(auxFechaCalificacion, "Prueba 2", "Descripcion 2", 5.0, 0.5);
 
     assertEquals(7.5, auxAsignatura.calificacionesFinales().get(alumno1), errorAdmisible);
     assertEquals(5.0, auxAsignatura.calificacionesParciales().get(alumno1), errorAdmisible);
